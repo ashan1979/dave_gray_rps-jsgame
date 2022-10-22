@@ -1,39 +1,50 @@
-//first interactive game
+// Rock Paper Scissors Refactored with While Loop and an Array
 
-let playGame = confirm("Shall we Play Rock, Paper or Scissors?");
+let playGame = confirm("Shall we Play Rock, Paper, or Scissors?");
 if (playGame) {
     //play
-    let playerChoice = prompt("Please Enter Rock, Paper or Scissors.");
-    if (playerChoice) {
-        let playerOne = playerChoice.trim().toLowerCase();
-        if (
-            playerOne === "rock" ||
-            playerOne === "paper" ||
-            playerOne === "scissors"
+    while (playGame) {
+        const playerChoice = prompt("Please Enter Rock, Paper, or Scissors.");
+        if (playerChoice || playerChoice === "") {
+            const playerOne = playerChoice.trim().toLowerCase();
+            if (
+                playerOne === "rock" ||
+                playerOne === "paper" ||
+                playerOne === "scissors"
             ) {
-            let computerChoice = Math.floor(Math.random() * 3 + 1);
-            let computer =
-                computerChoice === 1
-                    ? "rock"
-                : computerChoice === 2
-                    ? "paper"
-                : "scissors";
+                const computerChoice = Math.floor(Math.random() * 3);
+                const rpsArray = ["rock", "paper", "scissors"];
+                const computer = rpsArray[computerChoice];
 
-            let result =
-                playerOne === computer
+                const result =
+                 playerOne === computer
                     ? "Tie Game!"
                     : playerOne === "rock" && computer === "paper"
+                    ? `playerOne: ${playerOne}\nComputer: ${computer}\n wins!`
+                    : playerOne === "paper" && computer === "scissors"
                     ? `playerOne: ${playerOne}\nComputer: ${computer}\nComputer wins!`
-                    : playerOne=== "scissors" && computer === "rock"
+                    : playerOne === "scissors" && computer === "rock"
                     ? `playerOne: ${playerOne}\nComputer: ${computer}\nComputer wins!`
-                    : `playerOne: ${playerOne}\ncomputer: ${computer}\nComputer wins!`;
-            alert(result);
-            let playAgain = confirm("Play Again?");
-            playAgain ? location.reload() : alert("Okay, Thanks for Playing");
+                    : `playerOne: ${playerOne}\nComputer: ${computer}\nplayerOne wins!`;
+                alert(result);
+                playGame = confirm("Play Again?");
+                if (!playGame) alert("Ok, Thanks for Playing.");
+                continue;
+            } else {
+                alert("You Didn't Enter Rock, Paper, or Scissors.")
+                break
+            }
+
+
+            } else {
+                    alert("I Guess You Changed Your Mind. Maybe Next Time.");
+                    break
+            }
         }
+
+
+
+
     } else {
-        alert(" I guess You Changed Your Mind. Maybe Next Time")
+        alert("Ok, Maybe next Time")
     }
-} else {
-    alert("Okay, Maybe Next Time");
-}
